@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.OrdersLineMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.bean.OrdersLine" >
+    <id column="ODD_ID" property="oddId" jdbcType="DECIMAL" />
+    <result column="ODD_ORDER_ID" property="oddOrderId" jdbcType="DECIMAL" />
+    <result column="ODD_COUNT" property="oddCount" jdbcType="DECIMAL" />
+    <result column="ODD_UNIT" property="oddUnit" jdbcType="VARCHAR" />
+    <result column="ODD_PRICE" property="oddPrice" jdbcType="DECIMAL" />
+    <result column="PROD_ID" property="prodId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      ODD_ID, ODD_ORDER_ID, ODD_COUNT, ODD_UNIT, ODD_PRICE, PROD_ID
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.briup.bean.OrdersLineExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ORDERS_LINE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    ODD_ID,ODD_ORDER_ID,ODD_COUNT,ODD_UNIT,ODD_PRICE,PROD_ID
+    from ORDERS_LINE
+    where ODD_ID = #{oddId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ORDERS_LINE
+    where ODD_ID = #{oddId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.briup.bean.OrdersLineExample" >
+    delete from ORDERS_LINE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.briup.bean.OrdersLine" >
+    insert into ORDERS_LINE (ODD_ID, ODD_ORDER_ID, ODD_COUNT, 
+      ODD_UNIT, ODD_PRICE, PROD_ID
+      )
+    values (#{oddId,jdbcType=DECIMAL}, #{oddOrderId,jdbcType=DECIMAL}, #{oddCount,jdbcType=DECIMAL}, 
+      #{oddUnit,jdbcType=VARCHAR}, #{oddPrice,jdbcType=DECIMAL}, #{prodId,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.bean.OrdersLine" >
+    insert into ORDERS_LINE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oddId != null" >
+        ODD_ID,
+      </if>
+      <if test="oddOrderId != null" >
+        ODD_ORDER_ID,
+      </if>
+      <if test="oddCount != null" >
+        ODD_COUNT,
+      </if>
+      <if test="oddUnit != null" >
+        ODD_UNIT,
+      </if>
+      <if test="oddPrice != null" >
+        ODD_PRICE,
+      </if>
+      <if test="prodId != null" >
+        PROD_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oddId != null" >
+        #{oddId,jdbcType=DECIMAL},
+      </if>
+      <if test="oddOrderId != null" >
+        #{oddOrderId,jdbcType=DECIMAL},
+      </if>
+      <if test="oddCount != null" >
+        #{oddCount,jdbcType=DECIMAL},
+      </if>
+      <if test="oddUnit != null" >
+        #{oddUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="oddPrice != null" >
+        #{oddPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="prodId != null" >
+        #{prodId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.briup.bean.OrdersLineExample" resultType="java.lang.Integer" >
+    select count(*) from ORDERS_LINE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ORDERS_LINE
+    <set >
+      <if test="record.oddId != null" >
+        ODD_ID = #{record.oddId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.oddOrderId != null" >
+        ODD_ORDER_ID = #{record.oddOrderId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.oddCount != null" >
+        ODD_COUNT = #{record.oddCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.oddUnit != null" >
+        ODD_UNIT = #{record.oddUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oddPrice != null" >
+        ODD_PRICE = #{record.oddPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.prodId != null" >
+        PROD_ID = #{record.prodId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ORDERS_LINE
+    set ODD_ID = #{record.oddId,jdbcType=DECIMAL},
+      ODD_ORDER_ID = #{record.oddOrderId,jdbcType=DECIMAL},
+      ODD_COUNT = #{record.oddCount,jdbcType=DECIMAL},
+      ODD_UNIT = #{record.oddUnit,jdbcType=VARCHAR},
+      ODD_PRICE = #{record.oddPrice,jdbcType=DECIMAL},
+      PROD_ID = #{record.prodId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.bean.OrdersLine" >
+    update ORDERS_LINE
+    <set >
+      <if test="oddOrderId != null" >
+        ODD_ORDER_ID = #{oddOrderId,jdbcType=DECIMAL},
+      </if>
+      <if test="oddCount != null" >
+        ODD_COUNT = #{oddCount,jdbcType=DECIMAL},
+      </if>
+      <if test="oddUnit != null" >
+        ODD_UNIT = #{oddUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="oddPrice != null" >
+        ODD_PRICE = #{oddPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="prodId != null" >
+        PROD_ID = #{prodId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ODD_ID = #{oddId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.bean.OrdersLine" >
+    update ORDERS_LINE
+    set ODD_ORDER_ID = #{oddOrderId,jdbcType=DECIMAL},
+      ODD_COUNT = #{oddCount,jdbcType=DECIMAL},
+      ODD_UNIT = #{oddUnit,jdbcType=VARCHAR},
+      ODD_PRICE = #{oddPrice,jdbcType=DECIMAL},
+      PROD_ID = #{prodId,jdbcType=DECIMAL}
+    where ODD_ID = #{oddId,jdbcType=DECIMAL}
+  </update>
+</mapper>

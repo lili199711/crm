@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.SalPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.bean.SalPlan" >
+    <id column="PLA_ID" property="plaId" jdbcType="DECIMAL" />
+    <result column="PLA_CHC_ID" property="plaChcId" jdbcType="DECIMAL" />
+    <result column="PLA_TODO" property="plaTodo" jdbcType="VARCHAR" />
+    <result column="PLA_RESULT" property="plaResult" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      PLA_ID, PLA_CHC_ID, PLA_TODO, PLA_RESULT
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.briup.bean.SalPlanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SAL_PLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    PLA_ID,PLA_CHC_ID,PLA_TODO,PLA_RESULT
+    from SAL_PLAN
+    where PLA_ID = #{plaId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SAL_PLAN
+    where PLA_ID = #{plaId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.briup.bean.SalPlanExample" >
+    delete from SAL_PLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.briup.bean.SalPlan" >
+    insert into SAL_PLAN (PLA_ID, PLA_CHC_ID, PLA_TODO, 
+      PLA_RESULT)
+    values (#{plaId,jdbcType=DECIMAL}, #{plaChcId,jdbcType=DECIMAL}, #{plaTodo,jdbcType=VARCHAR}, 
+      #{plaResult,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.bean.SalPlan" >
+    insert into SAL_PLAN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="plaId != null" >
+        PLA_ID,
+      </if>
+      <if test="plaChcId != null" >
+        PLA_CHC_ID,
+      </if>
+      <if test="plaTodo != null" >
+        PLA_TODO,
+      </if>
+      <if test="plaResult != null" >
+        PLA_RESULT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="plaId != null" >
+        #{plaId,jdbcType=DECIMAL},
+      </if>
+      <if test="plaChcId != null" >
+        #{plaChcId,jdbcType=DECIMAL},
+      </if>
+      <if test="plaTodo != null" >
+        #{plaTodo,jdbcType=VARCHAR},
+      </if>
+      <if test="plaResult != null" >
+        #{plaResult,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.briup.bean.SalPlanExample" resultType="java.lang.Integer" >
+    select count(*) from SAL_PLAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SAL_PLAN
+    <set >
+      <if test="record.plaId != null" >
+        PLA_ID = #{record.plaId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.plaChcId != null" >
+        PLA_CHC_ID = #{record.plaChcId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.plaTodo != null" >
+        PLA_TODO = #{record.plaTodo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plaResult != null" >
+        PLA_RESULT = #{record.plaResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SAL_PLAN
+    set PLA_ID = #{record.plaId,jdbcType=DECIMAL},
+      PLA_CHC_ID = #{record.plaChcId,jdbcType=DECIMAL},
+      PLA_TODO = #{record.plaTodo,jdbcType=VARCHAR},
+      PLA_RESULT = #{record.plaResult,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.bean.SalPlan" >
+    update SAL_PLAN
+    <set >
+      <if test="plaChcId != null" >
+        PLA_CHC_ID = #{plaChcId,jdbcType=DECIMAL},
+      </if>
+      <if test="plaTodo != null" >
+        PLA_TODO = #{plaTodo,jdbcType=VARCHAR},
+      </if>
+      <if test="plaResult != null" >
+        PLA_RESULT = #{plaResult,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where PLA_ID = #{plaId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.bean.SalPlan" >
+    update SAL_PLAN
+    set PLA_CHC_ID = #{plaChcId,jdbcType=DECIMAL},
+      PLA_TODO = #{plaTodo,jdbcType=VARCHAR},
+      PLA_RESULT = #{plaResult,jdbcType=VARCHAR}
+    where PLA_ID = #{plaId,jdbcType=DECIMAL}
+  </update>
+</mapper>

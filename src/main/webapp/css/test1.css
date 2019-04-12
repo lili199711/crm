@@ -1,0 +1,95 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	color: #2f496e
+} 
+
+a {
+	COLOR: #2f496e;
+} 
+
+.op_button {
+	border: 0px;
+	cursor: hand;
+	width: 16px;
+} 
+ .page_title {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 40px;
+	FONT-WEIGHT: bold;
+	FONT-SIZE: 14px;
+	BACKGROUND-IMAGE: url(../images/m_mplace.gif);
+	PADDING-BOTTOM: 0px;
+	WIDTH: 208px;
+	COLOR: #1445a6;
+	PADDING-TOP: 4px;
+	BACKGROUND-REPEAT: no-repeat;
+	LETTER-SPACING: 3px
+}
+
+.page_title_middle {
+	background-image: url(../images/m_mpbg.gif)
+}
+
+.query_form_table {
+	width: 100%;
+	border: 0px;
+	font-size: 12px;
+	background-color: #c0ccdd;
+}
+
+.query_form_table tr {
+	background-color: #FFF;
+}
+
+.query_form_table tr th {
+	font-weight: normal;
+}
+
+ .common_button {
+	BORDER-RIGHT: 0px;
+	BORDER-TOP: 0px;
+	FONT-SIZE: 12px;
+	BACKGROUND-IMAGE: url(../images/m_an2.gif);
+	BORDER-LEFT: 0px;
+	WIDTH: 49px;
+	COLOR: #5b7cae;
+	PADDING-TOP: 3px;
+	BORDER-BOTTOM: 0px;
+	BACKGROUND-REPEAT: no-repeat;
+	HEIGHT: 20px;
+	BACKGROUND-COLOR: transparent
+} 
+
+.data_list_table {
+	width: 100%;
+	border: 0px;
+	font-size: 12px;
+	background-color: #c0ccdd
+}
+
+.data_list_table tr {
+	background-color: #FFF;
+}
+
+.list_data_number {
+	height: 23px;
+	text-align: right
+}
+
+.list_data_text {
+	text-align: center
+    margin: auto;
+}
+
+.list_data_ltext {
+	text-align: left
+}
+
+.list_data_op {
+	text-align: center;
+}
+
+ #firstth {
+	height: 25px;
+}  

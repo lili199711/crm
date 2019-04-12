@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.bean.SysUser" >
+    <id column="USR_ID" property="usrId" jdbcType="DECIMAL" />
+    <result column="USR_NAME" property="usrName" jdbcType="VARCHAR" />
+    <result column="USR_PASSWORD" property="usrPassword" jdbcType="VARCHAR" />
+    <result column="USR_FLAG" property="usrFlag" jdbcType="DECIMAL" />
+    <result column="USR_ROLE_ID" property="usrRoleId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      USR_ID, USR_NAME, USR_PASSWORD, USR_FLAG, USR_ROLE_ID
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.briup.bean.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    USR_ID,USR_NAME,USR_PASSWORD,USR_FLAG,USR_ROLE_ID
+    from SYS_USER
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SYS_USER
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.briup.bean.SysUserExample" >
+    delete from SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.briup.bean.SysUser" >
+    insert into SYS_USER (USR_ID, USR_NAME, USR_PASSWORD, 
+      USR_FLAG, USR_ROLE_ID)
+    values (#{usrId,jdbcType=DECIMAL}, #{usrName,jdbcType=VARCHAR}, #{usrPassword,jdbcType=VARCHAR}, 
+      #{usrFlag,jdbcType=DECIMAL}, #{usrRoleId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.bean.SysUser" >
+    insert into SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usrId != null" >
+        USR_ID,
+      </if>
+      <if test="usrName != null" >
+        USR_NAME,
+      </if>
+      <if test="usrPassword != null" >
+        USR_PASSWORD,
+      </if>
+      <if test="usrFlag != null" >
+        USR_FLAG,
+      </if>
+      <if test="usrRoleId != null" >
+        USR_ROLE_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usrId != null" >
+        #{usrId,jdbcType=DECIMAL},
+      </if>
+      <if test="usrName != null" >
+        #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrPassword != null" >
+        #{usrPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usrFlag != null" >
+        #{usrFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="usrRoleId != null" >
+        #{usrRoleId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.briup.bean.SysUserExample" resultType="java.lang.Integer" >
+    select count(*) from SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SYS_USER
+    <set >
+      <if test="record.usrId != null" >
+        USR_ID = #{record.usrId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.usrName != null" >
+        USR_NAME = #{record.usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrPassword != null" >
+        USR_PASSWORD = #{record.usrPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrFlag != null" >
+        USR_FLAG = #{record.usrFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="record.usrRoleId != null" >
+        USR_ROLE_ID = #{record.usrRoleId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SYS_USER
+    set USR_ID = #{record.usrId,jdbcType=DECIMAL},
+      USR_NAME = #{record.usrName,jdbcType=VARCHAR},
+      USR_PASSWORD = #{record.usrPassword,jdbcType=VARCHAR},
+      USR_FLAG = #{record.usrFlag,jdbcType=DECIMAL},
+      USR_ROLE_ID = #{record.usrRoleId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.bean.SysUser" >
+    update SYS_USER
+    <set >
+      <if test="usrName != null" >
+        USR_NAME = #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrPassword != null" >
+        USR_PASSWORD = #{usrPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="usrFlag != null" >
+        USR_FLAG = #{usrFlag,jdbcType=DECIMAL},
+      </if>
+      <if test="usrRoleId != null" >
+        USR_ROLE_ID = #{usrRoleId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.bean.SysUser" >
+    update SYS_USER
+    set USR_NAME = #{usrName,jdbcType=VARCHAR},
+      USR_PASSWORD = #{usrPassword,jdbcType=VARCHAR},
+      USR_FLAG = #{usrFlag,jdbcType=DECIMAL},
+      USR_ROLE_ID = #{usrRoleId,jdbcType=DECIMAL}
+    where USR_ID = #{usrId,jdbcType=DECIMAL}
+  </update>
+</mapper>

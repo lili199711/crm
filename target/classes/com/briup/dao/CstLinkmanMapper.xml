@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.CstLinkmanMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.bean.CstLinkman" >
+    <id column="LKM_ID" property="lkmId" jdbcType="DECIMAL" />
+    <result column="LKM_CUST_ID" property="lkmCustId" jdbcType="DECIMAL" />
+    <result column="LKM_CUST_NO" property="lkmCustNo" jdbcType="VARCHAR" />
+    <result column="LKM_CUST_NAME" property="lkmCustName" jdbcType="VARCHAR" />
+    <result column="LKM_NAME" property="lkmName" jdbcType="VARCHAR" />
+    <result column="LKM_SEX" property="lkmSex" jdbcType="VARCHAR" />
+    <result column="LKM_POSTION" property="lkmPostion" jdbcType="VARCHAR" />
+    <result column="LKM_TEL" property="lkmTel" jdbcType="VARCHAR" />
+    <result column="LKM_MOBILE" property="lkmMobile" jdbcType="VARCHAR" />
+    <result column="LKM_MEMO" property="lkmMemo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      LKM_ID, LKM_CUST_ID, LKM_CUST_NO, LKM_CUST_NAME, LKM_NAME, LKM_SEX, LKM_POSTION, 
+      LKM_TEL, LKM_MOBILE, LKM_MEMO
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.briup.bean.CstLinkmanExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CST_LINKMAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    LKM_ID,LKM_CUST_ID,LKM_CUST_NO,LKM_CUST_NAME,LKM_NAME,LKM_SEX,LKM_POSTION,LKM_TEL,LKM_MOBILE,LKM_MEMO
+    from CST_LINKMAN
+    where LKM_ID = #{lkmId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from CST_LINKMAN
+    where LKM_ID = #{lkmId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.briup.bean.CstLinkmanExample" >
+    delete from CST_LINKMAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.briup.bean.CstLinkman" >
+    insert into CST_LINKMAN (LKM_ID, LKM_CUST_ID, LKM_CUST_NO, 
+      LKM_CUST_NAME, LKM_NAME, LKM_SEX, 
+      LKM_POSTION, LKM_TEL, LKM_MOBILE, 
+      LKM_MEMO)
+    values (#{lkmId,jdbcType=DECIMAL}, #{lkmCustId,jdbcType=DECIMAL}, #{lkmCustNo,jdbcType=VARCHAR}, 
+      #{lkmCustName,jdbcType=VARCHAR}, #{lkmName,jdbcType=VARCHAR}, #{lkmSex,jdbcType=VARCHAR}, 
+      #{lkmPostion,jdbcType=VARCHAR}, #{lkmTel,jdbcType=VARCHAR}, #{lkmMobile,jdbcType=VARCHAR}, 
+      #{lkmMemo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.bean.CstLinkman" >
+    insert into CST_LINKMAN
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="lkmId != null" >
+        LKM_ID,
+      </if>
+      <if test="lkmCustId != null" >
+        LKM_CUST_ID,
+      </if>
+      <if test="lkmCustNo != null" >
+        LKM_CUST_NO,
+      </if>
+      <if test="lkmCustName != null" >
+        LKM_CUST_NAME,
+      </if>
+      <if test="lkmName != null" >
+        LKM_NAME,
+      </if>
+      <if test="lkmSex != null" >
+        LKM_SEX,
+      </if>
+      <if test="lkmPostion != null" >
+        LKM_POSTION,
+      </if>
+      <if test="lkmTel != null" >
+        LKM_TEL,
+      </if>
+      <if test="lkmMobile != null" >
+        LKM_MOBILE,
+      </if>
+      <if test="lkmMemo != null" >
+        LKM_MEMO,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="lkmId != null" >
+        #{lkmId,jdbcType=DECIMAL},
+      </if>
+      <if test="lkmCustId != null" >
+        #{lkmCustId,jdbcType=DECIMAL},
+      </if>
+      <if test="lkmCustNo != null" >
+        #{lkmCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmCustName != null" >
+        #{lkmCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmName != null" >
+        #{lkmName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmSex != null" >
+        #{lkmSex,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmPostion != null" >
+        #{lkmPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmTel != null" >
+        #{lkmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmMobile != null" >
+        #{lkmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmMemo != null" >
+        #{lkmMemo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.briup.bean.CstLinkmanExample" resultType="java.lang.Integer" >
+    select count(*) from CST_LINKMAN
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update CST_LINKMAN
+    <set >
+      <if test="record.lkmId != null" >
+        LKM_ID = #{record.lkmId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lkmCustId != null" >
+        LKM_CUST_ID = #{record.lkmCustId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lkmCustNo != null" >
+        LKM_CUST_NO = #{record.lkmCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmCustName != null" >
+        LKM_CUST_NAME = #{record.lkmCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmName != null" >
+        LKM_NAME = #{record.lkmName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmSex != null" >
+        LKM_SEX = #{record.lkmSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmPostion != null" >
+        LKM_POSTION = #{record.lkmPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmTel != null" >
+        LKM_TEL = #{record.lkmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmMobile != null" >
+        LKM_MOBILE = #{record.lkmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lkmMemo != null" >
+        LKM_MEMO = #{record.lkmMemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update CST_LINKMAN
+    set LKM_ID = #{record.lkmId,jdbcType=DECIMAL},
+      LKM_CUST_ID = #{record.lkmCustId,jdbcType=DECIMAL},
+      LKM_CUST_NO = #{record.lkmCustNo,jdbcType=VARCHAR},
+      LKM_CUST_NAME = #{record.lkmCustName,jdbcType=VARCHAR},
+      LKM_NAME = #{record.lkmName,jdbcType=VARCHAR},
+      LKM_SEX = #{record.lkmSex,jdbcType=VARCHAR},
+      LKM_POSTION = #{record.lkmPostion,jdbcType=VARCHAR},
+      LKM_TEL = #{record.lkmTel,jdbcType=VARCHAR},
+      LKM_MOBILE = #{record.lkmMobile,jdbcType=VARCHAR},
+      LKM_MEMO = #{record.lkmMemo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.bean.CstLinkman" >
+    update CST_LINKMAN
+    <set >
+      <if test="lkmCustId != null" >
+        LKM_CUST_ID = #{lkmCustId,jdbcType=DECIMAL},
+      </if>
+      <if test="lkmCustNo != null" >
+        LKM_CUST_NO = #{lkmCustNo,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmCustName != null" >
+        LKM_CUST_NAME = #{lkmCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmName != null" >
+        LKM_NAME = #{lkmName,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmSex != null" >
+        LKM_SEX = #{lkmSex,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmPostion != null" >
+        LKM_POSTION = #{lkmPostion,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmTel != null" >
+        LKM_TEL = #{lkmTel,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmMobile != null" >
+        LKM_MOBILE = #{lkmMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="lkmMemo != null" >
+        LKM_MEMO = #{lkmMemo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where LKM_ID = #{lkmId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.bean.CstLinkman" >
+    update CST_LINKMAN
+    set LKM_CUST_ID = #{lkmCustId,jdbcType=DECIMAL},
+      LKM_CUST_NO = #{lkmCustNo,jdbcType=VARCHAR},
+      LKM_CUST_NAME = #{lkmCustName,jdbcType=VARCHAR},
+      LKM_NAME = #{lkmName,jdbcType=VARCHAR},
+      LKM_SEX = #{lkmSex,jdbcType=VARCHAR},
+      LKM_POSTION = #{lkmPostion,jdbcType=VARCHAR},
+      LKM_TEL = #{lkmTel,jdbcType=VARCHAR},
+      LKM_MOBILE = #{lkmMobile,jdbcType=VARCHAR},
+      LKM_MEMO = #{lkmMemo,jdbcType=VARCHAR}
+    where LKM_ID = #{lkmId,jdbcType=DECIMAL}
+  </update>
+</mapper>

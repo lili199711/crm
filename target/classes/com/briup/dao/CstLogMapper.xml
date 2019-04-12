@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.CstLogMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.bean.CstLog" >
+    <id column="LOG_ID" property="logId" jdbcType="DECIMAL" />
+    <result column="LOG_OP" property="logOp" jdbcType="VARCHAR" />
+    <result column="LOG_EVENT" property="logEvent" jdbcType="VARCHAR" />
+    <result column="LOG_DATE" property="logDate" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      LOG_ID, LOG_OP, LOG_EVENT, LOG_DATE
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.briup.bean.CstLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CST_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    LOG_ID,LOG_OP,LOG_EVENT,LOG_DATE
+    from CST_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from CST_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.briup.bean.CstLogExample" >
+    delete from CST_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.briup.bean.CstLog" >
+    insert into CST_LOG (LOG_ID, LOG_OP, LOG_EVENT, 
+      LOG_DATE)
+    values (#{logId,jdbcType=DECIMAL}, #{logOp,jdbcType=VARCHAR}, #{logEvent,jdbcType=VARCHAR}, 
+      #{logDate,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.bean.CstLog" >
+    insert into CST_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        LOG_ID,
+      </if>
+      <if test="logOp != null" >
+        LOG_OP,
+      </if>
+      <if test="logEvent != null" >
+        LOG_EVENT,
+      </if>
+      <if test="logDate != null" >
+        LOG_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=DECIMAL},
+      </if>
+      <if test="logOp != null" >
+        #{logOp,jdbcType=VARCHAR},
+      </if>
+      <if test="logEvent != null" >
+        #{logEvent,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        #{logDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.briup.bean.CstLogExample" resultType="java.lang.Integer" >
+    select count(*) from CST_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update CST_LOG
+    <set >
+      <if test="record.logId != null" >
+        LOG_ID = #{record.logId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.logOp != null" >
+        LOG_OP = #{record.logOp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logEvent != null" >
+        LOG_EVENT = #{record.logEvent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logDate != null" >
+        LOG_DATE = #{record.logDate,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update CST_LOG
+    set LOG_ID = #{record.logId,jdbcType=DECIMAL},
+      LOG_OP = #{record.logOp,jdbcType=VARCHAR},
+      LOG_EVENT = #{record.logEvent,jdbcType=VARCHAR},
+      LOG_DATE = #{record.logDate,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.bean.CstLog" >
+    update CST_LOG
+    <set >
+      <if test="logOp != null" >
+        LOG_OP = #{logOp,jdbcType=VARCHAR},
+      </if>
+      <if test="logEvent != null" >
+        LOG_EVENT = #{logEvent,jdbcType=VARCHAR},
+      </if>
+      <if test="logDate != null" >
+        LOG_DATE = #{logDate,jdbcType=DATE},
+      </if>
+    </set>
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.bean.CstLog" >
+    update CST_LOG
+    set LOG_OP = #{logOp,jdbcType=VARCHAR},
+      LOG_EVENT = #{logEvent,jdbcType=VARCHAR},
+      LOG_DATE = #{logDate,jdbcType=DATE}
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+</mapper>

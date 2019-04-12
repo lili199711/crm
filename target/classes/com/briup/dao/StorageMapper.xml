@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.StorageMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.bean.Storage" >
+    <result column="STK_ID" property="stkId" jdbcType="DECIMAL" />
+    <result column="STK_WAREHOURSE" property="stkWarehourse" jdbcType="VARCHAR" />
+    <result column="STK_COUNT" property="stkCount" jdbcType="DECIMAL" />
+    <result column="STK_MEMO" property="stkMemo" jdbcType="VARCHAR" />
+    <result column="STK_WARE" property="stkWare" jdbcType="VARCHAR" />
+    <result column="STK_NAME" property="stkName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      STK_ID, STK_WAREHOURSE, STK_COUNT, STK_MEMO, STK_WARE, STK_NAME
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.briup.bean.StorageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from STORAGE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.briup.bean.StorageExample" >
+    delete from STORAGE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.briup.bean.Storage" >
+    insert into STORAGE (STK_ID, STK_WAREHOURSE, STK_COUNT, 
+      STK_MEMO, STK_WARE, STK_NAME
+      )
+    values (#{stkId,jdbcType=DECIMAL}, #{stkWarehourse,jdbcType=VARCHAR}, #{stkCount,jdbcType=DECIMAL}, 
+      #{stkMemo,jdbcType=VARCHAR}, #{stkWare,jdbcType=VARCHAR}, #{stkName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.bean.Storage" >
+    insert into STORAGE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="stkId != null" >
+        STK_ID,
+      </if>
+      <if test="stkWarehourse != null" >
+        STK_WAREHOURSE,
+      </if>
+      <if test="stkCount != null" >
+        STK_COUNT,
+      </if>
+      <if test="stkMemo != null" >
+        STK_MEMO,
+      </if>
+      <if test="stkWare != null" >
+        STK_WARE,
+      </if>
+      <if test="stkName != null" >
+        STK_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="stkId != null" >
+        #{stkId,jdbcType=DECIMAL},
+      </if>
+      <if test="stkWarehourse != null" >
+        #{stkWarehourse,jdbcType=VARCHAR},
+      </if>
+      <if test="stkCount != null" >
+        #{stkCount,jdbcType=DECIMAL},
+      </if>
+      <if test="stkMemo != null" >
+        #{stkMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="stkWare != null" >
+        #{stkWare,jdbcType=VARCHAR},
+      </if>
+      <if test="stkName != null" >
+        #{stkName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.briup.bean.StorageExample" resultType="java.lang.Integer" >
+    select count(*) from STORAGE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update STORAGE
+    <set >
+      <if test="record.stkId != null" >
+        STK_ID = #{record.stkId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stkWarehourse != null" >
+        STK_WAREHOURSE = #{record.stkWarehourse,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stkCount != null" >
+        STK_COUNT = #{record.stkCount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.stkMemo != null" >
+        STK_MEMO = #{record.stkMemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stkWare != null" >
+        STK_WARE = #{record.stkWare,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stkName != null" >
+        STK_NAME = #{record.stkName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update STORAGE
+    set STK_ID = #{record.stkId,jdbcType=DECIMAL},
+      STK_WAREHOURSE = #{record.stkWarehourse,jdbcType=VARCHAR},
+      STK_COUNT = #{record.stkCount,jdbcType=DECIMAL},
+      STK_MEMO = #{record.stkMemo,jdbcType=VARCHAR},
+      STK_WARE = #{record.stkWare,jdbcType=VARCHAR},
+      STK_NAME = #{record.stkName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

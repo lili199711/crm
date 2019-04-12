@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.SalChanceMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.bean.SalChance" >
+    <id column="CHC_ID" property="chcId" jdbcType="DECIMAL" />
+    <result column="CHC_SOURCE" property="chcSource" jdbcType="VARCHAR" />
+    <result column="CHC_CUST_NAME" property="chcCustName" jdbcType="VARCHAR" />
+    <result column="CHC_TITLE" property="chcTitle" jdbcType="VARCHAR" />
+    <result column="CHC_RATE" property="chcRate" jdbcType="DECIMAL" />
+    <result column="CHC_LINKMAN" property="chcLinkman" jdbcType="VARCHAR" />
+    <result column="CHC_TEL" property="chcTel" jdbcType="VARCHAR" />
+    <result column="CHC_ADDR" property="chcAddr" jdbcType="VARCHAR" />
+    <result column="CHC_DESC" property="chcDesc" jdbcType="VARCHAR" />
+    <result column="CHC_CREATE_BY" property="chcCreateBy" jdbcType="VARCHAR" />
+    <result column="CHC_DUE_TO" property="chcDueTo" jdbcType="VARCHAR" />
+    <result column="CHC_STATUS" property="chcStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      CHC_ID, CHC_SOURCE, CHC_CUST_NAME, CHC_TITLE, CHC_RATE, CHC_LINKMAN, CHC_TEL, CHC_ADDR, 
+      CHC_DESC, CHC_CREATE_BY, CHC_DUE_TO, CHC_STATUS
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.briup.bean.SalChanceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from SAL_CHANCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    CHC_ID,CHC_SOURCE,CHC_CUST_NAME,CHC_TITLE,CHC_RATE,CHC_LINKMAN,CHC_TEL,CHC_ADDR,CHC_DESC,CHC_CREATE_BY,CHC_DUE_TO,CHC_STATUS
+    from SAL_CHANCE
+    where CHC_ID = #{chcId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from SAL_CHANCE
+    where CHC_ID = #{chcId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.briup.bean.SalChanceExample" >
+    delete from SAL_CHANCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.briup.bean.SalChance" >
+    insert into SAL_CHANCE (CHC_ID, CHC_SOURCE, CHC_CUST_NAME, 
+      CHC_TITLE, CHC_RATE, CHC_LINKMAN, 
+      CHC_TEL, CHC_ADDR, CHC_DESC, 
+      CHC_CREATE_BY, CHC_DUE_TO, CHC_STATUS
+      )
+    values (#{chcId,jdbcType=DECIMAL}, #{chcSource,jdbcType=VARCHAR}, #{chcCustName,jdbcType=VARCHAR}, 
+      #{chcTitle,jdbcType=VARCHAR}, #{chcRate,jdbcType=DECIMAL}, #{chcLinkman,jdbcType=VARCHAR}, 
+      #{chcTel,jdbcType=VARCHAR}, #{chcAddr,jdbcType=VARCHAR}, #{chcDesc,jdbcType=VARCHAR}, 
+      #{chcCreateBy,jdbcType=VARCHAR}, #{chcDueTo,jdbcType=VARCHAR}, #{chcStatus,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.bean.SalChance" >
+    insert into SAL_CHANCE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="chcId != null" >
+        CHC_ID,
+      </if>
+      <if test="chcSource != null" >
+        CHC_SOURCE,
+      </if>
+      <if test="chcCustName != null" >
+        CHC_CUST_NAME,
+      </if>
+      <if test="chcTitle != null" >
+        CHC_TITLE,
+      </if>
+      <if test="chcRate != null" >
+        CHC_RATE,
+      </if>
+      <if test="chcLinkman != null" >
+        CHC_LINKMAN,
+      </if>
+      <if test="chcTel != null" >
+        CHC_TEL,
+      </if>
+      <if test="chcAddr != null" >
+        CHC_ADDR,
+      </if>
+      <if test="chcDesc != null" >
+        CHC_DESC,
+      </if>
+      <if test="chcCreateBy != null" >
+        CHC_CREATE_BY,
+      </if>
+      <if test="chcDueTo != null" >
+        CHC_DUE_TO,
+      </if>
+      <if test="chcStatus != null" >
+        CHC_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="chcId != null" >
+        #{chcId,jdbcType=DECIMAL},
+      </if>
+      <if test="chcSource != null" >
+        #{chcSource,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCustName != null" >
+        #{chcCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="chcTitle != null" >
+        #{chcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="chcRate != null" >
+        #{chcRate,jdbcType=DECIMAL},
+      </if>
+      <if test="chcLinkman != null" >
+        #{chcLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="chcTel != null" >
+        #{chcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="chcAddr != null" >
+        #{chcAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="chcDesc != null" >
+        #{chcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCreateBy != null" >
+        #{chcCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="chcDueTo != null" >
+        #{chcDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="chcStatus != null" >
+        #{chcStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.briup.bean.SalChanceExample" resultType="java.lang.Integer" >
+    select count(*) from SAL_CHANCE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update SAL_CHANCE
+    <set >
+      <if test="record.chcId != null" >
+        CHC_ID = #{record.chcId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chcSource != null" >
+        CHC_SOURCE = #{record.chcSource,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcCustName != null" >
+        CHC_CUST_NAME = #{record.chcCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcTitle != null" >
+        CHC_TITLE = #{record.chcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcRate != null" >
+        CHC_RATE = #{record.chcRate,jdbcType=DECIMAL},
+      </if>
+      <if test="record.chcLinkman != null" >
+        CHC_LINKMAN = #{record.chcLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcTel != null" >
+        CHC_TEL = #{record.chcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcAddr != null" >
+        CHC_ADDR = #{record.chcAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcDesc != null" >
+        CHC_DESC = #{record.chcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcCreateBy != null" >
+        CHC_CREATE_BY = #{record.chcCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcDueTo != null" >
+        CHC_DUE_TO = #{record.chcDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chcStatus != null" >
+        CHC_STATUS = #{record.chcStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update SAL_CHANCE
+    set CHC_ID = #{record.chcId,jdbcType=DECIMAL},
+      CHC_SOURCE = #{record.chcSource,jdbcType=VARCHAR},
+      CHC_CUST_NAME = #{record.chcCustName,jdbcType=VARCHAR},
+      CHC_TITLE = #{record.chcTitle,jdbcType=VARCHAR},
+      CHC_RATE = #{record.chcRate,jdbcType=DECIMAL},
+      CHC_LINKMAN = #{record.chcLinkman,jdbcType=VARCHAR},
+      CHC_TEL = #{record.chcTel,jdbcType=VARCHAR},
+      CHC_ADDR = #{record.chcAddr,jdbcType=VARCHAR},
+      CHC_DESC = #{record.chcDesc,jdbcType=VARCHAR},
+      CHC_CREATE_BY = #{record.chcCreateBy,jdbcType=VARCHAR},
+      CHC_DUE_TO = #{record.chcDueTo,jdbcType=VARCHAR},
+      CHC_STATUS = #{record.chcStatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.bean.SalChance" >
+    update SAL_CHANCE
+    <set >
+      <if test="chcSource != null" >
+        CHC_SOURCE = #{chcSource,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCustName != null" >
+        CHC_CUST_NAME = #{chcCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="chcTitle != null" >
+        CHC_TITLE = #{chcTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="chcRate != null" >
+        CHC_RATE = #{chcRate,jdbcType=DECIMAL},
+      </if>
+      <if test="chcLinkman != null" >
+        CHC_LINKMAN = #{chcLinkman,jdbcType=VARCHAR},
+      </if>
+      <if test="chcTel != null" >
+        CHC_TEL = #{chcTel,jdbcType=VARCHAR},
+      </if>
+      <if test="chcAddr != null" >
+        CHC_ADDR = #{chcAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="chcDesc != null" >
+        CHC_DESC = #{chcDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="chcCreateBy != null" >
+        CHC_CREATE_BY = #{chcCreateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="chcDueTo != null" >
+        CHC_DUE_TO = #{chcDueTo,jdbcType=VARCHAR},
+      </if>
+      <if test="chcStatus != null" >
+        CHC_STATUS = #{chcStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    where CHC_ID = #{chcId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.bean.SalChance" >
+    update SAL_CHANCE
+    set CHC_SOURCE = #{chcSource,jdbcType=VARCHAR},
+      CHC_CUST_NAME = #{chcCustName,jdbcType=VARCHAR},
+      CHC_TITLE = #{chcTitle,jdbcType=VARCHAR},
+      CHC_RATE = #{chcRate,jdbcType=DECIMAL},
+      CHC_LINKMAN = #{chcLinkman,jdbcType=VARCHAR},
+      CHC_TEL = #{chcTel,jdbcType=VARCHAR},
+      CHC_ADDR = #{chcAddr,jdbcType=VARCHAR},
+      CHC_DESC = #{chcDesc,jdbcType=VARCHAR},
+      CHC_CREATE_BY = #{chcCreateBy,jdbcType=VARCHAR},
+      CHC_DUE_TO = #{chcDueTo,jdbcType=VARCHAR},
+      CHC_STATUS = #{chcStatus,jdbcType=CHAR}
+    where CHC_ID = #{chcId,jdbcType=DECIMAL}
+  </update>
+</mapper>

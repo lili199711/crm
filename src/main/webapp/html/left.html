@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta charset="utf-8">
+<title>客户关系管理系统</title>
+
+<link rel="stylesheet" type="text/css" href="../css/nav.css">
+<link rel="stylesheet" type="text/css" href="../css/iconfont.css">
+
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/nav.js"></script>
+
+<script type="text/javascript">
+	//点击跳转
+	function forward(url) {
+		parent.frames["mainFrame"].location.href = url;
+	}
+</script>
+</head>
+<body>
+	<div class="nav">
+		<div class="nav-top">
+			<div id="mini"
+				style="border-bottom: 1px solid rgba(255, 255, 255, .1)">
+				<img src="../images/mini.png">
+			</div>
+		</div>
+		<ul>
+			<!--只有主管 高管 客户经理有营销管理-->
+			<li class="nav-item"><a href="javascript:;"><i
+					class="my-icon nav-icon  icon-iconset0253"></i><span>营销管理</span><i
+					class="my-icon nav-more"></i></a>
+				<ul>
+
+					<!--只有主管和高管才有销售机会管理   -->
+					<li onclick=""><a href="sale/list.html" target="mainFrame"><span>销售机会管理</span></a></li>
+
+					<!--只有经理和高管才有客户开发计划  -->
+					<li onclick=""><a href="sale/dev.html" target="mainFrame"><span>客户开发计划</span></a></li>
+				</ul></li>
+
+			<!-- 都有 -->
+			<li class="nav-item"><a href="javascript:;"><i
+					class="my-icon nav-icon icon-touxiang"></i><span>客户管理</span><i
+					class="my-icon nav-more"></i></a>
+				<ul>
+					<li onclick=""><a href="cust_info/list.html"
+						target="mainFrame"><span>客户信息管理</span></a></li>
+				</ul></li>
+
+			<!--只有高管 主管 经理有  -->
+			<li class="nav-item"><a href="javascript:;"><i
+					class="my-icon nav-icon icon-worldwide"></i><span>服务管理</span><i
+					class="my-icon nav-more"></i></a>
+				<ul>
+					<li onclick=""><a href="cust_service/add.html"
+						target="mainFrame"><span>服务创建</span></a></li>
+					<li onclick=""><a href="cust_service/dispatch.html"
+						target="mainFrame"><span>服务分配</span></a></li>
+					<li onclick=""><a href="cust_service/deal.html"
+						target="mainFrame"><span>服务处理</span></a></li>
+					<li onclick=""><a href="cust_service/feedback.html"
+						target="mainFrame"><span>服务反馈</span></a></li>
+				</ul></li>
+
+			<!--只有管理员 高管 主管有  -->
+			<li class="nav-item"><a href="javascript:;"><i
+					class="my-icon nav-icon icon-alarm"></i><span>统计报表</span><i
+					class="my-icon nav-more"></i></a>
+				<ul>
+					<li onclick=""><a href="jfreechart/contr.html"
+						target="mainFrame"><span>客户贡献分析</span></a></li>
+					<li onclick=""><a href="jfreechart/cons.html"
+						target="mainFrame"><span>客户构成分析</span></a></li>
+				</ul></li>
+
+
+			<!-- 都有 -->
+			<li class="nav-item"><a href="javascript:;"><i
+					class="my-icon nav-icon icon-shengyuliuliang"></i><span>基础数据</span><i
+					class="my-icon nav-more"></i></a>
+				<ul>
+					<li onclick=""><a href="basic/product.html" target="mainFrame"><span>查询产品信息</span></a></li>
+					<li onclick=""><a href="basic/storage.html" target="mainFrame"><span>查询库存</span></a></li>
+				</ul></li>
+
+			<!--只有系统管理员和高管有  -->
+			<li class="nav-item"><a href="javascript:;"><i
+					class="my-icon nav-icon icon-chilun"></i><span>系统设置</span><i
+					class="my-icon nav-more"></i></a>
+				<ul>
+					<li onclick=""><a href="systemset/role_manage.html"
+						target="mainFrame"><span>角色管理</span></a></li>
+					<li onclick=""><a href="systemset/user_manage.html"
+						target="mainFrame"><span>用户管理</span></a></li>
+					<li onclick=""><a href="systemset/log_review.html"
+						target="mainFrame"><span>日志查看</span></a></li>
+				</ul></li>
+		</ul>
+	</div>
+</body>
+</html>

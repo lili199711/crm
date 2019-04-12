@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 自动注册相关bean,用以支持SpringMVC的注解 -->
+	<mvc:annotation-driven/>
+	
+	<!-- 扫描哪个包下面有Spring中加了注解的组件 例如我们的Controller -->
+	<context:component-scan base-package="com.briup.web.controller">
+	
+	</context:component-scan>
+	
+	<!-- 注册视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>  
+		<property name="prefix" value="/WEB-INF/jsp/"/>  
+		<property name="suffix" value=".jsp"/>  
+	</bean>
+	
+	<!-- 处理静态资源的访问 -->
+	<mvc:resources mapping="/images/**" location="/images/"/>  
+	<mvc:resources mapping="/js/**" location="/js/"/>  
+	<mvc:resources mapping="/css/**" location="/css/"/> 
+	<mvc:resources mapping="/fonts/**" location="/fonts/"/> 
+	<mvc:resources mapping="/script/**" location="/script/"/> 
+	<!-- 视图名 -->
+	<mvc:view-controller path="/index" view-name="index"/>
+	<mvc:view-controller path="/main" view-name="main"/>
+	<mvc:view-controller path="/top" view-name="top"/>
+	<mvc:view-controller path="/left" view-name="left"/>
+	<mvc:view-controller path="/switch" view-name="switch"/>
+	<mvc:view-controller path="/help" view-name="help"/>
+	
+	
+</beans>

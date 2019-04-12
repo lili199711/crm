@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.briup.dao.CstActivityMapper" >
+  <resultMap id="BaseResultMap" type="com.briup.bean.CstActivity" >
+    <id column="ATV_ID" property="atvId" jdbcType="DECIMAL" />
+    <result column="ATV_CUST_NO" property="atvCustNo" jdbcType="CHAR" />
+    <result column="ATV_CUST_NAME" property="atvCustName" jdbcType="VARCHAR" />
+    <result column="ATV_PLACE" property="atvPlace" jdbcType="VARCHAR" />
+    <result column="ATV_TITLE" property="atvTitle" jdbcType="VARCHAR" />
+    <result column="ATV_DESC" property="atvDesc" jdbcType="VARCHAR" />
+    <result column="ATV_CUST_ID" property="atvCustId" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      ATV_ID, ATV_CUST_NO, ATV_CUST_NAME, ATV_PLACE, ATV_TITLE, ATV_DESC, ATV_CUST_ID
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.briup.bean.CstActivityExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CST_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    ATV_ID,ATV_CUST_NO,ATV_CUST_NAME,ATV_PLACE,ATV_TITLE,ATV_DESC,ATV_CUST_ID
+    from CST_ACTIVITY
+    where ATV_ID = #{atvId,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from CST_ACTIVITY
+    where ATV_ID = #{atvId,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.briup.bean.CstActivityExample" >
+    delete from CST_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.briup.bean.CstActivity" >
+    insert into CST_ACTIVITY (ATV_ID, ATV_CUST_NO, ATV_CUST_NAME, 
+      ATV_PLACE, ATV_TITLE, ATV_DESC, 
+      ATV_CUST_ID)
+    values (#{atvId,jdbcType=DECIMAL}, #{atvCustNo,jdbcType=CHAR}, #{atvCustName,jdbcType=VARCHAR}, 
+      #{atvPlace,jdbcType=VARCHAR}, #{atvTitle,jdbcType=VARCHAR}, #{atvDesc,jdbcType=VARCHAR}, 
+      #{atvCustId,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.briup.bean.CstActivity" >
+    insert into CST_ACTIVITY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="atvId != null" >
+        ATV_ID,
+      </if>
+      <if test="atvCustNo != null" >
+        ATV_CUST_NO,
+      </if>
+      <if test="atvCustName != null" >
+        ATV_CUST_NAME,
+      </if>
+      <if test="atvPlace != null" >
+        ATV_PLACE,
+      </if>
+      <if test="atvTitle != null" >
+        ATV_TITLE,
+      </if>
+      <if test="atvDesc != null" >
+        ATV_DESC,
+      </if>
+      <if test="atvCustId != null" >
+        ATV_CUST_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="atvId != null" >
+        #{atvId,jdbcType=DECIMAL},
+      </if>
+      <if test="atvCustNo != null" >
+        #{atvCustNo,jdbcType=CHAR},
+      </if>
+      <if test="atvCustName != null" >
+        #{atvCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="atvPlace != null" >
+        #{atvPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="atvTitle != null" >
+        #{atvTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="atvDesc != null" >
+        #{atvDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="atvCustId != null" >
+        #{atvCustId,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.briup.bean.CstActivityExample" resultType="java.lang.Integer" >
+    select count(*) from CST_ACTIVITY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update CST_ACTIVITY
+    <set >
+      <if test="record.atvId != null" >
+        ATV_ID = #{record.atvId,jdbcType=DECIMAL},
+      </if>
+      <if test="record.atvCustNo != null" >
+        ATV_CUST_NO = #{record.atvCustNo,jdbcType=CHAR},
+      </if>
+      <if test="record.atvCustName != null" >
+        ATV_CUST_NAME = #{record.atvCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.atvPlace != null" >
+        ATV_PLACE = #{record.atvPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.atvTitle != null" >
+        ATV_TITLE = #{record.atvTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.atvDesc != null" >
+        ATV_DESC = #{record.atvDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.atvCustId != null" >
+        ATV_CUST_ID = #{record.atvCustId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update CST_ACTIVITY
+    set ATV_ID = #{record.atvId,jdbcType=DECIMAL},
+      ATV_CUST_NO = #{record.atvCustNo,jdbcType=CHAR},
+      ATV_CUST_NAME = #{record.atvCustName,jdbcType=VARCHAR},
+      ATV_PLACE = #{record.atvPlace,jdbcType=VARCHAR},
+      ATV_TITLE = #{record.atvTitle,jdbcType=VARCHAR},
+      ATV_DESC = #{record.atvDesc,jdbcType=VARCHAR},
+      ATV_CUST_ID = #{record.atvCustId,jdbcType=DECIMAL}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.briup.bean.CstActivity" >
+    update CST_ACTIVITY
+    <set >
+      <if test="atvCustNo != null" >
+        ATV_CUST_NO = #{atvCustNo,jdbcType=CHAR},
+      </if>
+      <if test="atvCustName != null" >
+        ATV_CUST_NAME = #{atvCustName,jdbcType=VARCHAR},
+      </if>
+      <if test="atvPlace != null" >
+        ATV_PLACE = #{atvPlace,jdbcType=VARCHAR},
+      </if>
+      <if test="atvTitle != null" >
+        ATV_TITLE = #{atvTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="atvDesc != null" >
+        ATV_DESC = #{atvDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="atvCustId != null" >
+        ATV_CUST_ID = #{atvCustId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ATV_ID = #{atvId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.briup.bean.CstActivity" >
+    update CST_ACTIVITY
+    set ATV_CUST_NO = #{atvCustNo,jdbcType=CHAR},
+      ATV_CUST_NAME = #{atvCustName,jdbcType=VARCHAR},
+      ATV_PLACE = #{atvPlace,jdbcType=VARCHAR},
+      ATV_TITLE = #{atvTitle,jdbcType=VARCHAR},
+      ATV_DESC = #{atvDesc,jdbcType=VARCHAR},
+      ATV_CUST_ID = #{atvCustId,jdbcType=DECIMAL}
+    where ATV_ID = #{atvId,jdbcType=DECIMAL}
+  </update>
+</mapper>

@@ -1,0 +1,27 @@
+.buttom_line {
+	BORDER-RIGHT: #d8dbe0 1px; BORDER-TOP: #d8dbe0 1px; BORDER-LEFT: #d8dbe0 1px; BORDER-BOTTOM: #d8dbe0 1px solid
+}
+.buttom_lr_line {
+	BORDER-RIGHT: #b1b9ca 1px solid; BORDER-TOP: #b1b9ca 1px; BORDER-LEFT: #b1b9ca 1px solid; BORDER-BOTTOM: #b1b9ca 1px solid
+}
+.unnamed1 {
+	FONT-SIZE: 12px; LINE-HEIGHT: 20px
+}
+.bgstyle {
+	BACKGROUND-IMAGE: url(zcdbj.png)
+}
+.bgstyle1 {
+	BACKGROUND-IMAGE: url(zcdhgbj.png)
+}
+.fBlack {
+	COLOR: #000000
+}
+BODY {
+	MARGIN: 0px; SCROLLBAR-BASE-COLOR: #dce3eb; BACKGROUND-COLOR: #fbfbff
+}
+.bigtable {
+	BORDER-TOP: #b1b9ca 1px solid; MARGIN-LEFT: 2px
+}
+.divfont {
+	FONT-WEIGHT: bold; COLOR: #002e69
+}
